@@ -1,3 +1,48 @@
+//updated//
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Item{
+    int p;
+    int w;
+};
+
+int max_goods(vector<Item>& items,int mw){
+    vector<int>dp(mw+1,0);
+    for(auto it:items){
+        int price=it.p;
+        int weight=it.w;
+        for(int w=mw;w>=weight;--w){
+            dp[w]=max(dp[w-weight]+price,dp[w]);
+        }
+    }
+    return dp[mw];
+}
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        int n;
+        cin>>n;
+        vector<Item>item(n);
+        for(int i=0;i<n;i++){
+            cin>>item[i].p>>item[i].w;
+        }
+        int totalvalue =0;
+        int G,mw;
+        cin>>G;
+        for(int i=0;i<G;i++){
+            cin>>mw;
+            totalvalue += max_goods(item,mw);
+        }
+        cout<<totalvalue<<endl;
+    }
+    return 0;
+}
+
+
+//-=-=-=-=-=-=-=-=-=-=-=--=-=-=--==--=-=--=-=---=-=-=-=-=--=-=-=//
+
 #include<iostream>
 #include<vector>
 #include<algorithm>
